@@ -3,259 +3,186 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nuestra Historia ✨</title>
+    <title>Flores Amarillas para mi Amor Bonito 🌻</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --color-principal: #ff758c;
-            --color-secundario: #ff7eb3;
-            --fondo: linear-gradient(-45deg, #ff9a9e, #fad0c4, #ffd1ff);
+            --color-girasol: #FFD700;
+            --color-girasol-dark: #FFA500;
+            --color-tallo: #4CAF50;
+            --color-texto: #5D4037;
+            --fondo-cielo: linear-gradient(to bottom, #87CEEB 0%, #E0F7FA 70%, #C8E6C9 100%);
         }
 
         body {
             margin: 0; padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: var(--fondo);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-            display: flex; justify-content: center; align-items: center; height: 100vh;
-            overflow: hidden;
+            font-family: 'Quicksand', sans-serif;
+            background: var(--fondo-cielo);
+            min-height: 100vh; overflow-x: hidden;
+            display: flex; justify-content: center; align-items: center;
         }
 
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        /* --- Flores Amarillas Volando --- */
+        .flower-bg {
+            position: absolute; top: -10%; color: var(--color-girasol);
+            animation: fall linear forwards; z-index: 0;
+            opacity: 0.8; pointer-events: none;
+        }
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(360deg); }
         }
 
-        .container {
-            width: 85%; max-width: 380px;
-            background: rgba(255, 255, 255, 0.95);
+        /* --- Tarjeta Principal --- */
+        .card {
+            width: 90%; max-width: 450px;
+            background: rgba(255, 255, 255, 0.92);
             backdrop-filter: blur(10px);
-            padding: 40px 25px;
-            border-radius: 40px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            text-align: center;
-            animation: slideUp 0.8s ease-out;
+            padding: 35px 20px; border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            text-align: center; z-index: 10;
+            border: 4px solid var(--color-girasol);
+            animation: popIn 1s ease-out;
+            margin: 20px;
         }
 
-        @keyframes slideUp {
-            from { transform: translateY(30px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        @keyframes popIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+
+        h1 { font-family: 'Dancing Script', cursive; font-size: 2.3rem; color: var(--color-texto); margin-bottom: 5px; line-height: 1.2; }
+        .sub-msg { color: #4CAF50; font-weight: 600; margin-bottom: 20px; font-size: 1.1rem; }
+
+        /* --- Estilo del Contador --- */
+        .counter-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 10px; margin-bottom: 15px;
+        }
+        .time-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 10px; margin-bottom: 25px;
+        }
+        .counter-box {
+            background: #fff9c4; padding: 12px 5px; border-radius: 15px;
+            border: 1px solid var(--color-girasol);
+        }
+        .counter-num { display: block; font-size: 1.5rem; font-weight: bold; color: var(--color-girasol-dark); }
+        .counter-label { font-size: 0.7rem; color: #777; text-transform: uppercase; font-weight: bold; }
+
+        /* --- El Mensaje Especial --- */
+        .message-box {
+            background: rgba(255, 255, 255, 0.5);
+            padding: 20px; border-radius: 20px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.6rem; color: var(--color-texto);
+            line-height: 1.4; border: 1px dashed var(--color-girasol);
+            margin-top: 10px;
+        }
+        .signature {
+            display: block; margin-top: 15px;
+            font-size: 1.3rem; color: var(--color-girasol-dark);
+            font-weight: bold;
         }
 
-        .level-badge {
-            background: var(--color-principal);
-            color: white; padding: 8px 20px;
-            border-radius: 50px; font-weight: bold;
-            display: inline-block; margin-bottom: 15px;
-            box-shadow: 0 4px 10px rgba(255, 117, 140, 0.3);
-        }
-
-        .progress-track {
-            background: #eee; height: 10px;
-            border-radius: 20px; margin: 20px 0 40px 0;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            background: linear-gradient(90deg, #ff758c, #ff7eb3);
-            height: 100%; width: 0%; border-radius: 20px;
-            transition: width 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .message-box { min-height: 200px; display: flex; align-items: center; justify-content: center; }
-
-        #daily-text {
-            font-size: 1.15rem; color: #444; line-height: 1.6;
-            font-style: italic; animation: fadeIn 1s;
-        }
-
-        #day-label {
-            display: block; font-weight: bold; color: var(--color-principal);
-            margin-bottom: 10px; font-size: 1.4rem; font-style: normal;
-        }
-
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        .btn-main {
-            background: var(--color-principal);
-            color: white; border: none; padding: 18px 40px;
-            border-radius: 50px; font-size: 1.1rem; font-weight: bold;
-            cursor: pointer; transition: all 0.3s;
-            box-shadow: 0 10px 20px rgba(255, 117, 140, 0.3);
-        }
-
-        .btn-main:hover { transform: scale(1.05); }
-        .btn-main:disabled { background: #d0d0d0; transform: none; box-shadow: none; }
-        
-        .footer-note { margin-top: 25px; font-size: 0.7rem; color: #aaa; letter-spacing: 2px; }
-        .hidden { display: none; }
+        .footer-note { font-size: 0.7rem; color: #aaa; margin-top: 20px; letter-spacing: 2px; }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div id="lvl-tag" class="level-badge">Nivel 1</div>
-        <div style="font-size: 1.1rem; color: #666;">🔥 Racha: <span id="streak-num" style="color: #ff758c; font-weight: bold;">0</span> días</div>
+    <div class="card">
+        <h1>Flores amarillas para mi amor bonito:</h1>
+        <p class="sub-msg">Nuestro tiempo juntos 🌻</p>
+
+        <div class="counter-grid">
+            <div class="counter-box">
+                <span id="years" class="counter-num">0</span>
+                <span class="counter-label">Años</span>
+            </div>
+            <div class="counter-box">
+                <span id="months" class="counter-num">0</span>
+                <span class="counter-label">Meses</span>
+            </div>
+            <div class="counter-box">
+                <span id="days" class="counter-num">0</span>
+                <span class="counter-label">Días</span>
+            </div>
+        </div>
         
-        <div class="progress-track">
-            <div class="progress-fill" id="progress-bar"></div>
+        <div class="time-grid">
+            <div class="counter-box" style="background: white;">
+                <span id="hours" class="counter-num" style="font-size: 1.2rem;">0</span>
+                <span class="counter-label">Horas</span>
+            </div>
+            <div class="counter-box" style="background: white;">
+                <span id="minutes" class="counter-num" style="font-size: 1.2rem;">0</span>
+                <span class="counter-label">Min</span>
+            </div>
+            <div class="counter-box" style="background: white;">
+                <span id="seconds" class="counter-num" style="font-size: 1.2rem;">0</span>
+                <span class="counter-label">Seg</span>
+            </div>
         </div>
 
         <div class="message-box">
-            <div id="revelar-ui">
-                <p style="color: #888;">Hoy hay algo nuevo para ti...</p>
-                <button class="btn-main" onclick="revelar()">DESCUBRIR</button>
-            </div>
-            
-            <div id="mensaje-ui" class="hidden">
-                <div id="daily-text"></div>
-                <p style="font-size: 1.5rem; margin-top: 15px;">🌹</p>
-                <button class="btn-main" disabled style="margin-top: 20px; font-size: 0.9rem;">Vuelve mañana</button>
-            </div>
+            si pudiera elegir un lugar seguro seria a tu lado.<br>
+            cada dia te quiero mas, cada dia me enamoro mas de ti, cada dia contigo es mejor.
+            <span class="signature">ATT: El amor de tu vida</span>
         </div>
-        <p class="footer-note">HASTA EL 16 DE MAYO Y SIEMPRE</p>
+
+        <p class="footer-note">PARA SIEMPRE ❤️</p>
     </div>
 
     <script>
-        const MIS_MENSAJES = [
-            "¡Hoy es el inicio de este viaje! Eres lo más bonito de mi día. ❤️",
-            "Gracias por ser tú, siempre. ✨",
-            "Cada día me gustas un poquito más. 🌸",
-            "¡Mira esa racha! Eres increíble. 🚀",
-            "¡Nivel 1 completado! Eres mi favorita. 🏆",
-            "Te quiero más que ayer, pero menos que mañana. 😍",
-            "Una semana juntos en esto. ¡Eres la mejor! 🌹",
-            "Cuando pensé que el amor ya no volvería, llegaste tú.",
-            "Y mi corazón que ya no esperaba nada, empezó a latir como si siempre te hubiera estado esperando.",
-            "Tal vez yo no sé para dónde ir, pero si puedo una mañana abrir los ojos y ver los tuyos, sabría dónde quedarme.",
-            "Entonces te conocí y comprendí que un corazón como el tuyo, se merece el mundo entero.",
-            "“Ama lo suficiente como para perdonar incluso cuando duela, Jesús dijo: no te digo siete veces, sino setenta veces siete”",
-            "Cuando el amor volvió a encontrarme.",
-            "Me volví a enamorar pero esta vez fue distinto. Nadie había querido conocerme por dentro, porque por fuera nunca me sentí perfecto por más que lo dijera.",
-            "Esa sensación de que de verdad le importas a alguien con un simple mensaje de 'llegaste bien' y preguntándome si el mundo no me había pesado demasiado.",
-            "Esos nervios que siento antes de tener cualquier encuentro contigo, esa sensación de ansias por la llegada de ese día en que por fin voy a poder verla y compartir una noche que rompa la rutina y me recuerde que aún sé vibrar.",
-            "Me estaba acostumbrado a la soledad, a ese silencio que uno termina llamando hogar, pero llegaste y sanaste esa parte mía que llevaba tanto tiempo viviendo entre las sombras.",
-            "“Perdería 81 años de mi vida orbitando a Gargantúa con tal de encontrar un mundo donde pudieses vivir”",
-            "“El amor es paciente, servicial y sin envidia. No quiere aparentar, ni se hace el importante. No actúa con bajeza, ni busca su propio interés. El amor no se deja llevar por la ira, sino que olvida las ofensas y perdona. Nunca se alegra de algo injusto y siempre le agrada la verdad. El amor disculpa todo; y todo lo cree, todo lo espera y todo lo soporta.” 1 Corintios 13:4-7",
-            "Cada día te quiero más, cada día me enamoro más de ti, cada día contigo es mejor.",
-            "De verdad quiero quedarme contigo y no por apego, quiero quedarme contigo porque tu risa me hace feliz, esos ojitos hermosos me iluminan el sol como a la tierra.",
-            "No sé cómo agradecerte, pero estoy muy contento de que hayas llegado a mi vida porque la hiciste mucho mejor.",
-            "Gracias por aparecer en mi vida, por estar ahí siempre y por hacer mis días más bonitos.",
-            "Discúlpame si soy muy insistente y muy intenso, solo quiero demostrarte que de verdad me importas.",
-            "Al final del día lo que necesito para ser feliz, ¡eres tú!",
-            "“Todo lo puedo en Cristo que me fortalece” - Filipenses 4:13",
-            "Me gustaría sentarme a ver la luna contigo, aunque lo más probable es que me distraiga viéndote a ti.",
-            // --- NUEVOS MENSAJES AGREGADOS ---
-            "“Donde tú vayas, yo iré; donde tú vivas, yo viviré.” - Rut 1:16",
-            "Eres mi refugio seguro en medio de cualquier tormenta.",
-            "“Andábamos sin buscarnos, pero sabiendo que andábamos para encontrarnos.” - Julio Cortázar",
-            "“Si te quiero es porque sos mi amor, mi cómplice y todo.” - Mario Benedetti",
-            "Gracias por ser mi paz en un mundo tan lleno de ruido.",
-            "“El corazón del hombre traza su rumbo, pero el Señor dirige sus pasos.” - Proverbios 16:9",
-            "Cada vez que te veo, vuelvo a confirmar que eres tú.",
-            "“Podrá nublarse el sol eternamente... pero jamás podrá apagarse en mí la llama de tu amor.” - Bécquer",
-            "Haces que lo ordinario se sienta extraordinario.",
-            "“Hagan todo con amor.” - 1 Corintios 16:14",
-            "No hay rincón de mi alma que no te pertenezca.",
-            "“Te espero sin plazo, sin tiempo.” - Jaime Sabines",
-            "Tus abrazos son el lugar donde siempre quiero estar.",
-            "“Grábame como un sello sobre tu corazón.” - Cantar de los Cantares 8:6",
-            "Eres el sueño del que nunca quiero despertar.",
-            "“Ven a dormir conmigo: no haremos el amor, él nos hará.” - Julio Cortázar",
-            "Contigo el tiempo no corre, vuela.",
-            "“El Señor es mi pastor, nada me faltará.” - Salmo 23:1 (Gracias por ser mi bendición).",
-            "Eres mi pensamiento favorito al despertar.",
-            "“Para mi corazón basta tu pecho, para tu libertad bastan mis alas.” - Pablo Neruda",
-            "Tu amor es mi mayor fortaleza.",
-            "“Por encima de todo, vístanse de amor, que es el vínculo perfecto.” - Colosenses 3:14",
-            "Me haces mejor persona cada día.",
-            "“Usted es la mujer que yo quiero, desde la cabeza hasta los pies.” - Mario Benedetti",
-            "Eres la respuesta a todas mis oraciones.",
-            "“Donde no puedas amar, no te demores.” - Frida Kahlo (Y yo quiero quedarme siempre).",
-            "Eres mi pedacito de cielo en la tierra.",
-            "“El amor nunca deja de ser.” - 1 Corintios 13:8",
-            "Gracias por iluminar mis días más grises.",
-            "“Besos que vienen riendo, luego llorando se van, y en ellos se va la vida, que nunca más volverá.” - Miguel de Unamuno",
-            "A tu lado, todo tiene sentido.",
-            "“En el amor no hay temor, sino que el perfecto amor echa fuera el temor.” - 1 Juan 4:18",
-            "Eres mi hoy y todos mis mañanas.",
-            "“Tardé una hora en conocerte y un solo día en enamorarme. Pero me llevará toda una vida olvidarte.”",
-            "Eres la melodía que mi corazón siempre quiere cantar.",
-            "“Grande es tu fidelidad.” - Lamentaciones 3:23",
-            "Gracias por elegirme hoy y siempre.",
-            "“Eres la respuesta que no esperaba, a una pregunta que no hice.”",
-            "Me encanta la persona en la que me convierto cuando estoy contigo.",
-            "“Bienaventurados los limpios de corazón, porque ellos verán a Dios.” - Mateo 5:8 (Veo a Dios en tu bondad).",
-            "Eres mi hogar favorito.",
-            "“Te quiero como para escuchar tu risa toda la noche.”",
-            "Gracias por ser mi cómplice en todo.",
-            "“Deléitate en el Señor, y él te concederá los deseos de tu corazón.” - Salmo 37:4",
-            "Tu sonrisa es mi motor.",
-            "“Eres el verso más lindo que la vida ha escrito en mis días.”",
-            "Amo la paz que me transmites con solo mirarme.",
-            "“Que el Señor te bendiga y te guarde.” - Números 6:24",
-            "Contigo la vida es una aventura hermosa.",
-            "“Te amo por encima de todo lo que no se ve, por encima de todo lo que no se sabe.”",
-            "Eres mi mayor tesoro.",
-            "“Este es el día que hizo el Señor; nos gozaremos y alegraremos en él.” - Salmo 118:24",
-            "Gracias por llenar mi vida de luz.",
-            "“No fuiste mi primera opción, fuiste mi mejor elección.”",
-            "Tu amor me hace sentir invencible.",
-            "“Gracia y paz sean a ustedes.” - Efesios 1:2",
-            "Eres la calma después de la tormenta.",
-            "“Te quiero no por quien eres, sino por quien soy cuando estoy contigo.” - Gabriel García Márquez",
-            "Gracias por caminar de mi mano.",
-            "“Jehová es mi luz y mi salvación; ¿de quién temeré?” - Salmo 27:1",
-            "Eres mi coincidencia más hermosa.",
-            "“Amar es encontrar en la felicidad de otro, la propia felicidad.”",
-            "Prometo cuidarte siempre.",
-            "“Todo lo que es verdadero, todo lo honesto, todo lo justo... en esto pensad.” - Filipenses 4:8 (Pienso en ti).",
-            "Eres el regalo más grande de mi vida.",
-            "“La medida del amor es amar sin medida.” - San Agustín",
-            "Gracias por ser mi motivación diaria.",
-            "“Yo soy de mi amado y mi amado es mío.” - Cantar de los Cantares 6:3",
-            "Eres el motivo de mi gratitud constante.",
-            "“El amor es el significado último de todo lo que nos rodea.” - R. Tagore",
-            "No imagino un futuro si no es a tu lado.",
-            "“Dios es amor.” - 1 Juan 4:8 (Y su amor se refleja en ti).",
-            "Eres mi persona favorita en todo el universo.",
-            "Gracias por hacerme vibrar con el alma.",
-            "“Y si el amor fuera una palabra, tú serías el significado.”",
-            "Hasta el 16 de mayo y por el resto de mi vida, te elijo a ti."
-        ];
+        // FECHA DE INICIO: Hace exactamente 3 semanas desde hoy (28 de febrero de 2026)
+        const FECHA_INICIO = new Date('2026-02-28T00:00:00'); 
 
-        let racha = parseInt(localStorage.getItem('racha_val')) || 0;
-        let ultimaFecha = localStorage.getItem('fecha_val');
-        let hoy = new Date().toDateString();
+        function actualizarContador() {
+            const ahora = new Date();
+            let diff = ahora - FECHA_INICIO;
 
-        function actualizarPantalla() {
-            document.getElementById('streak-num').innerText = racha;
-            let nivel = Math.floor(racha / 5) + 1;
-            document.getElementById('lvl-tag').innerText = "Nivel " + nivel;
-            let progreso = (racha % 5) * 20;
-            if (racha > 0 && racha % 5 === 0) progreso = 100;
-            document.getElementById('progress-bar').style.width = progreso + "%";
+            // Cálculos de tiempo
+            let segundos = Math.floor(diff / 1000);
+            let minutos = Math.floor(segundos / 60);
+            let horas = Math.floor(minutos / 60);
+            let diasTotales = Math.floor(horas / 24);
 
-            if (ultimaFecha === hoy) {
-                document.getElementById('revelar-ui').classList.add('hidden');
-                document.getElementById('mensaje-ui').classList.remove('hidden');
-                let mensajeFinal = `<span id="day-label">Día ${racha}</span>` + (MIS_MENSAJES[racha - 1] || "Has completado este hermoso camino. ❤️");
-                document.getElementById('daily-text').innerHTML = mensajeFinal;
+            // Cálculos precisos de Años, Meses y Días
+            let anios = ahora.getFullYear() - FECHA_INICIO.getFullYear();
+            let meses = ahora.getMonth() - FECHA_INICIO.getMonth();
+            let dias = ahora.getDate() - FECHA_INICIO.getDate();
+
+            if (meses < 0 || (meses === 0 && ahora.getDate() < FECHA_INICIO.getDate())) {
+                anios--;
+                meses += 12;
             }
+            if (dias < 0) {
+                const ultimoDiaMesAnterior = new Date(ahora.getFullYear(), ahora.getMonth(), 0).getDate();
+                meses--;
+                dias += ultimoDiaMesAnterior;
+            }
+
+            // Actualizar el HTML
+            document.getElementById('years').innerText = anios;
+            document.getElementById('months').innerText = meses;
+            document.getElementById('days').innerText = dias;
+            document.getElementById('hours').innerText = horas % 24;
+            document.getElementById('minutes').innerText = minutos % 60;
+            document.getElementById('seconds').innerText = segundos % 60;
         }
 
-        function revelar() {
-            if (ultimaFecha !== hoy) {
-                racha++;
-                ultimaFecha = hoy;
-                localStorage.setItem('racha_val', racha);
-                localStorage.setItem('fecha_val', hoy);
-                actualizarPantalla();
-            }
+        // Animación de flores amarillas (🌻, 🌼, 💛)
+        function crearFlor() {
+            const flor = document.createElement('div');
+            flor.classList.add('flower-bg');
+            const flores = ['🌻', '🌼', '💛', '🌻'];
+            flor.innerHTML = flores[Math.floor(Math.random() * flores.length)];
+            flor.style.left = Math.random() * 100 + 'vw';
+            flor.style.animationDuration = Math.random() * 3 + 5 + 's';
+            flor.style.fontSize = Math.random() * 20 + 15 + 'px';
+            document.body.appendChild(flor);
+            setTimeout(() => { flor.remove(); }, 8000);
         }
 
-        actualizarPantalla();
+        setInterval(crearFlor, 400);
+        setInterval(actualizarContador, 1000);
+        actualizarContador();
     </script>
 </body>
 </html>
