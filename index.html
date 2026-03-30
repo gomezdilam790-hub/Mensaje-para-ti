@@ -3,211 +3,253 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flores Amarillas para mi Amor Bonito 🌻</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <title>Nuestra Historia ✨</title>
     <style>
         :root {
-            --color-girasol: #FFD700;
-            --color-girasol-dark: #FFA500;
-            --color-texto: #5D4037;
-            --fondo-cielo: linear-gradient(to bottom, #87CEEB 0%, #E0F7FA 70%, #C8E6C9 100%);
+            --color-principal: #ff758c;
+            --color-secundario: #ff7eb3;
+            --fondo: linear-gradient(-45deg, #ff9a9e, #fad0c4, #ffd1ff);
         }
 
         body {
             margin: 0; padding: 0;
-            font-family: 'Quicksand', sans-serif;
-            background: var(--fondo-cielo);
-            min-height: 100vh;
-            /* CAMBIO: Permitimos el scroll para que se pueda leer todo */
-            overflow-y: auto; 
-            overflow-x: hidden;
-            display: flex; justify-content: center; align-items: flex-start;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--fondo);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            display: flex; justify-content: center; align-items: center; height: 100vh;
+            overflow: hidden;
         }
 
-        /* --- Flores Amarillas Volando (Fondo) --- */
-        .flower-bg {
-            position: absolute; top: -10%; color: var(--color-girasol);
-            animation: fall linear forwards; z-index: 1;
-            opacity: 0.6; pointer-events: none;
-        }
-        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
-
-        /* --- PANTALLA INICIAL --- */
-        #capa-inicio {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 100; display: flex; flex-direction: column; 
-            justify-content: center; align-items: center; cursor: pointer;
-            background: var(--fondo-cielo);
-        }
-        .girasol-principal { font-size: 6rem; animation: pulseGlow 2s infinite; }
-        @keyframes pulseGlow { 
-            0%, 100% { transform: scale(1); } 
-            50% { transform: scale(1.1); } 
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        /* --- PANTALLA DE CONTENIDO --- */
-        #capa-contenido {
-            width: 90%; max-width: 450px;
-            padding: 20px 0; display: flex; flex-direction: column; align-items: center;
-            z-index: 10;
+        .container {
+            width: 85%; max-width: 380px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 40px 25px;
+            border-radius: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            text-align: center;
+            animation: slideUp 0.8s ease-out;
         }
 
-        /* --- El Ramo Corazón --- */
-        .bouquet-heart-container {
-            width: 280px; height: 260px; position: relative;
-            margin-bottom: 20px; flex-shrink: 0;
-        }
-        .girasol-corazon {
-            font-size: 2rem; position: absolute; opacity: 0; transform: scale(0);
-        }
-        @keyframes growFlower {
-            0% { opacity: 0; transform: scale(0); }
-            100% { opacity: 1; transform: scale(1); }
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
-        /* --- La Tarjeta de Mensaje --- */
-        .message-card {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 25px 20px; border-radius: 30px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            text-align: center; border: 4px solid var(--color-girasol);
-            opacity: 0; transform: translateY(30px);
-            transition: all 1s; width: 100%; box-sizing: border-box;
-            margin-bottom: 50px; /* Espacio al final */
+        .level-badge {
+            background: var(--color-principal);
+            color: white; padding: 8px 20px;
+            border-radius: 50px; font-weight: bold;
+            display: inline-block; margin-bottom: 15px;
+            box-shadow: 0 4px 10px rgba(255, 117, 140, 0.3);
         }
 
-        h1 { font-family: 'Dancing Script', cursive; font-size: 1.8rem; color: var(--color-texto); margin: 0 0 10px 0; }
+        .progress-track {
+            background: #eee; height: 10px;
+            border-radius: 20px; margin: 20px 0 40px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #ff758c, #ff7eb3);
+            height: 100%; width: 0%; border-radius: 20px;
+            transition: width 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .message-box { min-height: 200px; display: flex; align-items: center; justify-content: center; }
+
+        #daily-text {
+            font-size: 1.15rem; color: #444; line-height: 1.6;
+            font-style: italic; animation: fadeIn 1s;
+        }
+
+        #day-label {
+            display: block; font-weight: bold; color: var(--color-principal);
+            margin-bottom: 10px; font-size: 1.4rem; font-style: normal;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .btn-main {
+            background: var(--color-principal);
+            color: white; border: none; padding: 18px 40px;
+            border-radius: 50px; font-size: 1.1rem; font-weight: bold;
+            cursor: pointer; transition: all 0.3s;
+            box-shadow: 0 10px 20px rgba(255, 117, 140, 0.3);
+        }
+
+        .btn-main:hover { transform: scale(1.05); }
+        .btn-main:disabled { background: #d0d0d0; transform: none; box-shadow: none; }
         
-        /* --- Contador --- */
-        .counter-grid, .time-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 10px; }
-        .counter-box { background: #fff9c4; padding: 10px 2px; border-radius: 12px; border: 1px solid var(--color-girasol); }
-        .counter-num { display: block; font-size: 1.2rem; font-weight: bold; color: var(--color-girasol-dark); }
-        .counter-label { font-size: 0.6rem; color: #777; font-weight: bold; }
-
-        /* --- Texto --- */
-        .message-text {
-            font-family: 'Dancing Script', cursive; font-size: 1.5rem; color: var(--color-texto);
-            line-height: 1.4; border-top: 1px dashed var(--color-girasol); padding-top: 15px;
-            text-align: center; word-wrap: break-word;
-        }
-        .signature { display: block; margin-top: 10px; font-weight: bold; color: var(--color-girasol-dark); opacity: 0; transition: 1s; }
-
-        .hidden { display: none !important; }
-        .visible { opacity: 1 !important; transform: translateY(0) !important; }
+        .footer-note { margin-top: 25px; font-size: 0.7rem; color: #aaa; letter-spacing: 2px; }
+        .hidden { display: none; }
     </style>
 </head>
 <body>
 
-    <div id="capa-inicio" onclick="iniciarFlorecimiento()">
-        <span class="girasol-principal">🌻</span>
-        <p style="font-weight:bold; color:#555;">Toca para florecer</p>
-    </div>
-
-    <div id="capa-contenido" class="hidden">
-        <div id="corazon-bouquet" class="bouquet-heart-container"></div>
-
-        <div id="tarjeta-mensaje" class="message-card">
-            <h1>Flores amarillas para mi amor bonito:</h1>
-            
-            <div id="seccion-contador" class="hidden">
-                <div class="counter-grid">
-                    <div class="counter-box"><span id="years" class="counter-num">0</span><span class="counter-label">Años</span></div>
-                    <div class="counter-box"><span id="months" class="counter-num">0</span><span class="counter-label">Meses</span></div>
-                    <div class="counter-box"><span id="days" class="counter-num">0</span><span class="counter-label">Días</span></div>
-                </div>
-                <div class="time-grid">
-                    <div class="counter-box" style="background:white;"><span id="hours" class="counter-num">0</span><span class="counter-label">Hrs</span></div>
-                    <div class="counter-box" style="background:white;"><span id="minutes" class="counter-num">0</span><span class="counter-label">Min</span></div>
-                    <div class="counter-box" style="background:white;"><span id="seconds" class="counter-num">0</span><span class="counter-label">Seg</span></div>
-                </div>
-            </div>
-
-            <div id="texto-typewriter" class="message-text"></div>
-            <span id="firma-amor" class="signature">ATT: El amor de tu vida</span>
+    <div class="container">
+        <div id="lvl-tag" class="level-badge">Nivel 1</div>
+        <div style="font-size: 1.1rem; color: #666;">🔥 Racha: <span id="streak-num" style="color: #ff758c; font-weight: bold;">0</span> días</div>
+        
+        <div class="progress-track">
+            <div class="progress-fill" id="progress-bar"></div>
         </div>
+
+        <div class="message-box">
+            <div id="revelar-ui">
+                <p style="color: #888;">Hoy hay algo nuevo para ti...</p>
+                <button class="btn-main" onclick="revelar()">DESCUBRIR</button>
+            </div>
+            
+            <div id="mensaje-ui" class="hidden">
+                <div id="daily-text"></div>
+                <p id="emoji-final" style="font-size: 1.5rem; margin-top: 15px;">🌹</p>
+                <button id="btn-vuelve" class="btn-main" disabled style="margin-top: 20px; font-size: 0.9rem;">Vuelve mañana</button>
+            </div>
+        </div>
+        <p class="footer-note">HASTA EL 28 DE MAYO Y SIEMPRE</p>
     </div>
 
     <script>
-        const FECHA_INICIO = new Date('2026-02-28T00:00:00'); 
-        const MENSAJE_COMPLETO = "si pudiera elegir un lugar seguro seria a tu lado.\ncada dia te quiero mas, cada dia me enamoro mas de ti, cada dia contigo es mejor.";
-
-        const PUNTOS_CORAZON = [
-            {x: 140, y: 60}, {x: 180, y: 40}, {x: 220, y: 50}, {x: 240, y: 80}, {x: 250, y: 120}, {x: 230, y: 160}, {x: 190, y: 200}, {x: 140, y: 240},
-            {x: 90, y: 200}, {x: 50, y: 160}, {x: 30, y: 120}, {x: 40, y: 80}, {x: 60, y: 50}, {x: 100, y: 40}, {x: 140, y: 90}, 
-            {x: 170, y: 90}, {x: 200, y: 110}, {x: 180, y: 150}, {x: 140, y: 180}, {x: 100, y: 150}, {x: 80, y: 110}, {x: 110, y: 90}
+        // Los mensajes se adaptarán dinámicamente hasta el 28 de mayo.
+        const MIS_MENSAJES = [
+            "Hoy empezamos esto y solo quiero decirte que eres lo más bonito que tengo.",
+            "Gracias por ser tú y por estar conmigo siempre.",
+            "No sé cómo lo haces, pero cada día me gustas un poquito más.",
+            "Llevamos varios días en esto y me encanta que lo estemos compartiendo.",
+            "Nivel uno completado. Definitivamente eres mi persona favorita.",
+            "Te quiero muchísimo. Cada día que pasa estoy más convencido de eso.",
+            "Ya llevamos una semana con estos mensajes y espero que sean muchísimas más.",
+            "Cuando pensé que el amor ya no volvería, llegaste tú.",
+            "Y mi corazón que ya no esperaba nada, empezó a latir como si siempre te hubiera estado esperando.",
+            "Tal vez yo no sé para dónde ir, pero si puedo una mañana abrir los ojos y ver los tuyos, sabría dónde quedarme.",
+            "Entonces te conocí y comprendí que un corazón como el tuyo, se merece el mundo entero.",
+            "Ama lo suficiente como para perdonar incluso cuando duela, Jesús dijo: no te digo siete veces, sino setenta veces siete",
+            "Cuando el amor volvió a encontrarme.",
+            "Me volví a enamorar pero esta vez fue distinto. Nadie había querido conocerme por dentro.",
+            "Esa sensación de que de verdad le importas a alguien con un simple mensaje de 'llegaste bien'.",
+            "Esos nervios que siento antes de verte, esa sensación de ansias por compartir una noche que rompa la rutina.",
+            "Me estaba acostumbrado a la soledad, pero llegaste y sanaste esa parte mía que vivía entre las sombras.",
+            "Perdería 81 años de mi vida orbitando a Gargantúa con tal de encontrar un mundo donde pudieses vivir",
+            "El amor es paciente, servicial y sin envidia. El amor disculpa todo; y todo lo cree, todo lo espera y todo lo soporta.",
+            "Cada día te quiero más, cada día me enamoro más de ti, cada día contigo es mejor.",
+            "De verdad quiero quedarme contigo y no por apego, sino porque tu risa me hace feliz.",
+            "No sé cómo agradecerte, pero estoy muy contento de que la vida te haya puesto en mi camino.",
+            "Gracias por aparecer en mi vida, por estar ahí siempre y por hacer mis días más bonitos.",
+            "Discúlpame si soy muy intenso, solo quiero demostrarte que de verdad me importas.",
+            "Al final del día lo que necesito para ser feliz, ¡eres tú!",
+            "Todo lo puedo en Cristo que me fortalece.",
+            "Me gustaría sentarme a ver la luna contigo, aunque lo más probable es que me distraiga viéndote a ti.",
+            "Donde tú vayas, yo iré; donde tú vivas, yo viviré.",
+            "Eres mi refugio seguro en medio de cualquier tormenta.",
+            "Andábamos sin buscarnos, pero sabiendo que andábamos para encontrarnos.",
+            "Si te quiero es porque sos mi amor, mi cómplice y todo.",
+            "Gracias por ser mi paz en un mundo tan lleno de ruido.",
+            "El corazón del hombre traza su rumbo, pero el Señor dirige sus pasos.",
+            "Cada vez que te veo, vuelvo a confirmar que eres tú.",
+            "Podrá nublarse el sol eternamente... pero jamás podrá apagarse en mí la llama de tu amor.",
+            "Haces que lo ordinario se sienta extraordinario.",
+            "Hagan todo con amor.",
+            "No hay rincón de mi alma que no te pertenezca.",
+            "Te espero sin plazo, sin tiempo.",
+            "Tus abrazos son el lugar donde siempre quiero estar.",
+            "Grábame como un sello sobre tu corazón.",
+            "Eres el sueño del que nunca quiero despertar.",
+            "Ven a dormir conmigo: no haremos el amor, él nos hará.",
+            "Contigo el tiempo no corre, vuela.",
+            "El Señor es mi pastor, nada me faltará (Gracias por ser mi bendición).",
+            "Eres mi pensamiento favorito al despertar.",
+            "Para mi corazón basta tu pecho, para tu libertad bastan mis alas.",
+            "Tu amor es mi mayor fortaleza.",
+            "Por encima de todo, vístanse de amor, que es el vínculo perfecto.",
+            "Me haces mejor persona cada día.",
+            "Usted es la mujer que yo quiero, desde la cabeza hasta los pies.",
+            "Eres la respuesta a todas mis oraciones.",
+            "Donde no puedas amar, no te demores (Y yo quiero quedarme siempre).",
+            "Eres mi pedacito de cielo en la tierra.",
+            "El amor nunca deja de ser.",
+            "Gracias por iluminar mis días más grises.",
+            "A tu lado, todo tiene sentido.",
+            "En el amor no hay temor, sino que el perfecto amor echa fuera el temor.",
+            "Eres mi hoy y todos mis mañanas.",
+            "Eres la melodía que mi corazón siempre quiere cantar.",
+            "Gracias por elegirme hoy y siempre.",
+            "Eres la respuesta que no esperaba, a una pregunta que no hice.",
+            "Me encanta la persona en la que me convierto cuando estoy contigo.",
+            "Te quiero como para escuchar tu risa toda la noche.",
+            "Gracias por ser mi cómplice en todo.",
+            "Tu sonrisa es mi motor.",
+            "Amo la paz que me transmites con solo mirarme.",
+            "Contigo la vida es una aventura hermosa.",
+            "Eres mi mayor tesoro.",
+            "Gracias por llenar mi vida de luz.",
+            "Tu amor me hace sentir invencible.",
+            "Eres la calma después de la tormenta.",
+            "Gracias por caminar de mi mano.",
+            "Eres mi coincidencia más hermosa.",
+            "Prometo cuidarte siempre.",
+            "Eres el regalo más grande de mi vida.",
+            "Gracias por ser mi motivación diaria.",
+            "Yo soy de mi amado y mi amado es mío.",
+            "No imagino un futuro si no es a tu lado.",
+            "Eres mi persona favorita en todo el universo.",
+            "Gracias por hacerme vibrar con el alma.",
+            // MENSAJES DE RECTA FINAL (Adaptados al 28 de mayo)
+            "Siento que cada día que pasa nos estamos preparando para algo mucho más grande.",
+            "Me encanta lo que hemos construido hasta hoy, pero siento que esto es apenas el prólogo.",
+            "Llegar hasta aquí contigo ha sido el viaje más increíble de mi vida.",
+            "Mañana este contador termina, pero siento que es porque algo nuevo y real está por empezar.",
+            // MENSAJE FINAL (DÍA 28 DE MAYO)
+            "Hoy termina este juego de mensajes diarios, porque ya no quiero que sea un mensaje en una pantalla lo que te recuerde cuánto te quiero. Quiero que lo que sigue de nuestra historia lo escribamos de una forma más oficial. Hoy es el día en que todo cambia para mejor."
         ];
 
-        function iniciarFlorecimiento() {
-            document.getElementById('capa-inicio').classList.add('hidden');
-            document.getElementById('capa-contenido').classList.remove('hidden');
+        let racha = parseInt(localStorage.getItem('racha_val')) || 0;
+        let ultimaFecha = localStorage.getItem('fecha_val');
+        let hoy = new Date().toDateString();
 
-            const contenedor = document.getElementById('corazon-bouquet');
-            PUNTOS_CORAZON.forEach((punto, index) => {
-                const flor = document.createElement('span');
-                flor.classList.add('girasol-corazon');
-                flor.innerHTML = '🌻';
-                flor.style.left = punto.x + 'px';
-                flor.style.top = punto.y + 'px';
-                flor.style.animation = `growFlower 0.5s ease-out ${index * 0.1}s forwards`;
-                contenedor.appendChild(flor);
-            });
+        function actualizarPantalla() {
+            document.getElementById('streak-num').innerText = racha;
+            let nivel = Math.floor(racha / 5) + 1;
+            document.getElementById('lvl-tag').innerText = "Nivel " + nivel;
+            let progreso = (racha % 5) * 20;
+            if (racha > 0 && racha % 5 === 0) progreso = 100;
+            document.getElementById('progress-bar').style.width = progreso + "%";
 
-            setTimeout(() => {
-                document.getElementById('tarjeta-mensaje').classList.add('visible');
-                typeWriter();
-            }, 2500);
-        }
+            if (ultimaFecha === hoy) {
+                document.getElementById('revelar-ui').classList.add('hidden');
+                document.getElementById('mensaje-ui').classList.remove('hidden');
+                
+                // Determinar si es el último mensaje (Día 86 si empiezas hoy, o el largo de tu lista)
+                let esUltimoDia = (racha === MIS_MENSAJES.length);
+                
+                let mensajeFinal = `<span id="day-label">Día ${racha}</span>` + (MIS_MENSAJES[racha - 1] || "Has completado este hermoso camino. ❤️");
+                document.getElementById('daily-text').innerHTML = mensajeFinal;
 
-        function typeWriter() {
-            let i = 0;
-            const elementoTexto = document.getElementById('texto-typewriter');
-            function typing() {
-                if (i < MENSAJE_COMPLETO.length) {
-                    elementoTexto.innerHTML += MENSAJE_COMPLETO.charAt(i) === '\n' ? '<br>' : MENSAJE_COMPLETO.charAt(i);
-                    i++; setTimeout(typing, 50);
-                } else {
-                    document.getElementById('firma-amor').style.opacity = '1';
-                    document.getElementById('seccion-contador').classList.remove('hidden');
-                    iniciarCalculoContador();
+                if (esUltimoDia) {
+                    document.getElementById('btn-vuelve').innerText = "Nuestra historia continúa...";
+                    document.getElementById('emoji-final').innerText = "💍❤️";
                 }
             }
-            typing();
         }
 
-        function iniciarCalculoContador() {
-            function actualizar() {
-                const ahora = new Date();
-                let diff = ahora - FECHA_INICIO;
-                let s = Math.floor(diff/1000);
-                let m = Math.floor(s/60);
-                let h = Math.floor(m/60);
-                
-                let anios = ahora.getFullYear() - FECHA_INICIO.getFullYear();
-                let meses = ahora.getMonth() - FECHA_INICIO.getMonth();
-                let dias = ahora.getDate() - FECHA_INICIO.getDate();
-                if (meses < 0) { anios--; meses += 12; }
-                if (dias < 0) { meses--; const u = new Date(ahora.getFullYear(), ahora.getMonth(), 0).getDate(); dias += u; }
-
-                document.getElementById('years').innerText = anios;
-                document.getElementById('months').innerText = meses;
-                document.getElementById('days').innerText = dias;
-                document.getElementById('hours').innerText = h % 24;
-                document.getElementById('minutes').innerText = m % 60;
-                document.getElementById('seconds').innerText = s % 60;
+        function revelar() {
+            if (ultimaFecha !== hoy) {
+                racha++;
+                ultimaFecha = hoy;
+                localStorage.setItem('racha_val', racha);
+                localStorage.setItem('fecha_val', hoy);
+                actualizarPantalla();
             }
-            setInterval(actualizar, 1000); actualizar();
         }
 
-        function crearFlor() {
-            const f = document.createElement('div');
-            f.classList.add('flower-bg');
-            f.innerHTML = '🌻';
-            f.style.left = Math.random() * 100 + 'vw';
-            f.style.animationDuration = Math.random() * 3 + 5 + 's';
-            document.body.appendChild(f);
-            setTimeout(() => f.remove(), 7000);
-        }
-        setInterval(crearFlor, 600);
+        actualizarPantalla();
     </script>
 </body>
 </html>
