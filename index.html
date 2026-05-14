@@ -1,22 +1,18 @@
 <script>
+
     // =========================
-    // CONFIGURACIÓN PRINCIPAL
+    // FECHA ESPECIAL
     // =========================
 
-    // Día actual real donde van
-    const DIA_INICIAL = 44;
-
-    // Fecha en la que comenzó todo
-    const FECHA_INICIO = new Date("2026-05-01");
-
-    // Fecha especial
-    const FECHA_FINAL = new Date("2026-06-28");
+    // 28 de junio de 2026
+    const FECHA_FINAL = new Date(2026, 5, 28);
 
     // =========================
     // MENSAJES
     // =========================
 
     const MIS_MENSAJES = [
+
         "Hoy empezamos esto y solo quiero decirte que eres lo más bonito que tengo.",
         "Gracias por ser tú y por estar conmigo siempre.",
         "No sé cómo lo haces, pero cada día me gustas un poquito más.",
@@ -27,7 +23,7 @@
         "Cuando pensé que el amor ya no volvería, llegaste tú.",
         "Y mi corazón que ya no esperaba nada, empezó a latir como si siempre te hubiera estado esperando.",
         "Tal vez yo no sé para dónde ir, pero si puedo una mañana abrir los ojos y ver los tuyos, sabría dónde quedarme.",
-        "Entonces te conocí y comprendí que un corazón como el tuyo, se merece el mundo entero.",
+        "Entonces te conocí y comprendí que un corazón como el tuyo se merece el mundo entero.",
         "Ama lo suficiente como para perdonar incluso cuando duela.",
         "Cuando el amor volvió a encontrarme.",
         "Me volví a enamorar pero esta vez fue distinto.",
@@ -39,7 +35,7 @@
         "Tu risa me hace feliz.",
         "Gracias por aparecer en mi vida.",
         "Discúlpame si soy muy intenso.",
-        "Al final del día lo que necesito para ser feliz, eres tú.",
+        "Al final del día lo que necesito para ser feliz eres tú.",
         "Todo lo puedo en Cristo que me fortalece.",
         "Me gustaría sentarme a ver la luna contigo.",
         "Donde tú vayas, yo iré.",
@@ -66,7 +62,7 @@
         "Eres mi persona favorita.",
         "Gracias por hacerme vibrar con el alma.",
 
-        // NUEVAS FRASES PARA LLEGAR AL 28 DE JUNIO
+        // NUEVAS FRASES
         "Siento que algo muy bonito está creciendo entre nosotros.",
         "Cada día contigo se siente más especial que el anterior.",
         "A veces me sorprendo sonriendo solo por pensar en ti.",
@@ -90,9 +86,13 @@
         "Ya no eres solo alguien importante para mí.",
         "Creo que mi corazón tomó una decisión hace mucho tiempo.",
         "Mañana será un día muy importante para nosotros."
+
     ];
 
-    // MENSAJE FINAL DEL 28 DE JUNIO
+    // =========================
+    // MENSAJE FINAL
+    // =========================
+
     const MENSAJE_FINAL =
         "Hoy ya no quiero seguir expresando lo que siento solamente en mensajes. Quiero preguntarte algo que llevo sintiendo desde hace mucho tiempo... ¿Quieres ser mi novia? 💍❤️";
 
@@ -100,13 +100,16 @@
     // SISTEMA
     // =========================
 
-    let racha = parseInt(localStorage.getItem('racha_val')) || DIA_INICIAL;
+    let racha = parseInt(localStorage.getItem('racha_val')) || 44;
+
     let ultimaFecha = localStorage.getItem('fecha_val');
 
     let hoy = new Date().toDateString();
 
     function esFechaFinal() {
+
         const hoyReal = new Date();
+
         return (
             hoyReal.getFullYear() === FECHA_FINAL.getFullYear() &&
             hoyReal.getMonth() === FECHA_FINAL.getMonth() &&
@@ -119,21 +122,29 @@
         document.getElementById('streak-num').innerText = racha;
 
         let nivel = Math.floor(racha / 5) + 1;
+
         document.getElementById('lvl-tag').innerText = "Nivel " + nivel;
 
         let progreso = (racha % 5) * 20;
-        if (racha > 0 && racha % 5 === 0) progreso = 100;
+
+        if (racha > 0 && racha % 5 === 0) {
+            progreso = 100;
+        }
 
         document.getElementById('progress-bar').style.width = progreso + "%";
 
         if (ultimaFecha === hoy) {
 
             document.getElementById('revelar-ui').classList.add('hidden');
+
             document.getElementById('mensaje-ui').classList.remove('hidden');
 
-            let mensaje;
+            let mensaje = "";
 
-            // 28 DE JUNIO
+            // =========================
+            // SI ES 28 DE JUNIO
+            // =========================
+
             if (esFechaFinal()) {
 
                 mensaje = MENSAJE_FINAL;
@@ -145,8 +156,12 @@
 
             } else {
 
+                // =========================
                 // MENSAJES INFINITOS
-                let indiceMensaje = (racha - 1) % MIS_MENSAJES.length;
+                // =========================
+
+                let indiceMensaje =
+                    (racha - 1) % MIS_MENSAJES.length;
 
                 mensaje = MIS_MENSAJES[indiceMensaje];
 
@@ -180,4 +195,5 @@
     }
 
     actualizarPantalla();
+
 </script>
