@@ -1,199 +1,367 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Nuestra Historia ✨</title>
+
+<style>
+
+:root{
+    --color-principal:#ff758c;
+    --color-secundario:#ff7eb3;
+    --fondo:linear-gradient(-45deg,#ff9a9e,#fad0c4,#ffd1ff);
+}
+
+body{
+    margin:0;
+    padding:0;
+    font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+    background:var(--fondo);
+    background-size:400% 400%;
+    animation:gradientBG 15s ease infinite;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    overflow:hidden;
+}
+
+@keyframes gradientBG{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+.container{
+    width:85%;
+    max-width:380px;
+    background:rgba(255,255,255,0.95);
+    backdrop-filter:blur(10px);
+    padding:40px 25px;
+    border-radius:40px;
+    box-shadow:0 20px 40px rgba(0,0,0,0.1);
+    text-align:center;
+    animation:slideUp 0.8s ease-out;
+}
+
+@keyframes slideUp{
+    from{
+        transform:translateY(30px);
+        opacity:0;
+    }
+    to{
+        transform:translateY(0);
+        opacity:1;
+    }
+}
+
+.level-badge{
+    background:var(--color-principal);
+    color:white;
+    padding:8px 20px;
+    border-radius:50px;
+    font-weight:bold;
+    display:inline-block;
+    margin-bottom:15px;
+    box-shadow:0 4px 10px rgba(255,117,140,0.3);
+}
+
+.progress-track{
+    background:#eee;
+    height:10px;
+    border-radius:20px;
+    margin:20px 0 40px 0;
+    overflow:hidden;
+}
+
+.progress-fill{
+    background:linear-gradient(90deg,#ff758c,#ff7eb3);
+    height:100%;
+    width:0%;
+    border-radius:20px;
+    transition:width 1.5s cubic-bezier(0.175,0.885,0.32,1.275);
+}
+
+.message-box{
+    min-height:200px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+#daily-text{
+    font-size:1.15rem;
+    color:#444;
+    line-height:1.6;
+    font-style:italic;
+    animation:fadeIn 1s;
+}
+
+#day-label{
+    display:block;
+    font-weight:bold;
+    color:var(--color-principal);
+    margin-bottom:10px;
+    font-size:1.4rem;
+    font-style:normal;
+}
+
+@keyframes fadeIn{
+    from{opacity:0;}
+    to{opacity:1;}
+}
+
+.btn-main{
+    background:var(--color-principal);
+    color:white;
+    border:none;
+    padding:18px 40px;
+    border-radius:50px;
+    font-size:1.1rem;
+    font-weight:bold;
+    cursor:pointer;
+    transition:all 0.3s;
+    box-shadow:0 10px 20px rgba(255,117,140,0.3);
+}
+
+.btn-main:hover{
+    transform:scale(1.05);
+}
+
+.btn-main:disabled{
+    background:#d0d0d0;
+    transform:none;
+    box-shadow:none;
+}
+
+.footer-note{
+    margin-top:25px;
+    font-size:0.7rem;
+    color:#aaa;
+    letter-spacing:2px;
+}
+
+.hidden{
+    display:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div id="lvl-tag" class="level-badge">
+        Nivel 1
+    </div>
+
+    <div style="font-size:1.1rem;color:#666;">
+        🔥 Racha:
+        <span id="streak-num" style="color:#ff758c;font-weight:bold;">
+            44
+        </span>
+        días
+    </div>
+
+    <div class="progress-track">
+        <div class="progress-fill" id="progress-bar"></div>
+    </div>
+
+    <div class="message-box">
+
+        <div id="revelar-ui">
+
+            <p style="color:#888;">
+                Hoy hay algo nuevo para ti...
+            </p>
+
+            <button class="btn-main" onclick="revelar()">
+                DESCUBRIR
+            </button>
+
+        </div>
+
+        <div id="mensaje-ui" class="hidden">
+
+            <div id="daily-text"></div>
+
+            <p id="emoji-final"
+               style="font-size:1.5rem;margin-top:15px;">
+               🌹
+            </p>
+
+            <button id="btn-vuelve"
+                    class="btn-main"
+                    disabled
+                    style="margin-top:20px;font-size:0.9rem;">
+
+                Vuelve mañana
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <p class="footer-note">
+        Hasta el 28 de junio ❤️
+    </p>
+
+</div>
+
 <script>
 
-    // =========================
-    // FECHA ESPECIAL
-    // =========================
+const FECHA_FINAL = new Date(2026,5,28);
 
-    // 28 de junio de 2026
-    const FECHA_FINAL = new Date(2026, 5, 28);
+const MIS_MENSAJES = [
 
-    // =========================
-    // MENSAJES
-    // =========================
+"Hoy empezamos esto y solo quiero decirte que eres lo más bonito que tengo.",
+"Gracias por ser tú y por estar conmigo siempre.",
+"No sé cómo lo haces, pero cada día me gustas un poquito más.",
+"Llevamos varios días en esto y me encanta que lo estemos compartiendo.",
+"Nivel uno completado. Definitivamente eres mi persona favorita.",
+"Te quiero muchísimo.",
+"Cada día contigo se siente más especial.",
+"Tu sonrisa es mi lugar favorito.",
+"Gracias por existir.",
+"Eres mi paz.",
+"Contigo todo tiene sentido.",
+"Me haces feliz.",
+"Eres mi pensamiento favorito.",
+"Prometo cuidarte siempre.",
+"No imagino un futuro sin ti.",
+"Gracias por hacerme vibrar con el alma.",
+"Siento que algo muy bonito está creciendo entre nosotros.",
+"Cada día contigo se siente más especial que el anterior.",
+"A veces me sorprendo sonriendo solo por pensar en ti.",
+"Llegaste sin avisar y ahora no imagino mis días sin ti.",
+"Contigo todo se siente más tranquilo.",
+"Me gusta la forma en que haces feliz mi corazón.",
+"Eres esa casualidad que terminó cambiando todo.",
+"Cada conversación contigo se convierte en mi parte favorita del día.",
+"No sabía cuánto necesitaba tu presencia hasta que llegaste.",
+"Me encanta construir recuerdos contigo.",
+"Tienes una forma de hacer que todo valga la pena.",
+"No quiero que esto sea algo pasajero.",
+"Siento paz cuando estoy contigo.",
+"Quiero seguir descubriendo la vida contigo.",
+"Gracias por existir y coincidir conmigo.",
+"Lo mejor de mis días casi siempre termina siendo tú.",
+"Poco a poco te has convertido en mi lugar favorito.",
+"Creo que mi corazón tomó una decisión hace mucho tiempo.",
+"Mañana será un día muy importante para nosotros."
 
-    const MIS_MENSAJES = [
+];
 
-        "Hoy empezamos esto y solo quiero decirte que eres lo más bonito que tengo.",
-        "Gracias por ser tú y por estar conmigo siempre.",
-        "No sé cómo lo haces, pero cada día me gustas un poquito más.",
-        "Llevamos varios días en esto y me encanta que lo estemos compartiendo.",
-        "Nivel uno completado. Definitivamente eres mi persona favorita.",
-        "Te quiero muchísimo. Cada día que pasa estoy más convencido de eso.",
-        "Ya llevamos una semana con estos mensajes y espero que sean muchísimas más.",
-        "Cuando pensé que el amor ya no volvería, llegaste tú.",
-        "Y mi corazón que ya no esperaba nada, empezó a latir como si siempre te hubiera estado esperando.",
-        "Tal vez yo no sé para dónde ir, pero si puedo una mañana abrir los ojos y ver los tuyos, sabría dónde quedarme.",
-        "Entonces te conocí y comprendí que un corazón como el tuyo se merece el mundo entero.",
-        "Ama lo suficiente como para perdonar incluso cuando duela.",
-        "Cuando el amor volvió a encontrarme.",
-        "Me volví a enamorar pero esta vez fue distinto.",
-        "Esa sensación de que de verdad le importas a alguien.",
-        "Esos nervios que siento antes de verte.",
-        "Me estaba acostumbrando a la soledad, pero llegaste tú.",
-        "El amor es paciente, servicial y sin envidia.",
-        "Cada día te quiero más.",
-        "Tu risa me hace feliz.",
-        "Gracias por aparecer en mi vida.",
-        "Discúlpame si soy muy intenso.",
-        "Al final del día lo que necesito para ser feliz eres tú.",
-        "Todo lo puedo en Cristo que me fortalece.",
-        "Me gustaría sentarme a ver la luna contigo.",
-        "Donde tú vayas, yo iré.",
-        "Eres mi refugio seguro.",
-        "Andábamos sin buscarnos, pero sabiendo que andábamos para encontrarnos.",
-        "Gracias por ser mi paz.",
-        "Cada vez que te veo, vuelvo a confirmar que eres tú.",
-        "Haces que lo ordinario se sienta extraordinario.",
-        "No hay rincón de mi alma que no te pertenezca.",
-        "Tus abrazos son el lugar donde siempre quiero estar.",
-        "Contigo el tiempo no corre, vuela.",
-        "Eres mi pensamiento favorito al despertar.",
-        "Tu amor es mi mayor fortaleza.",
-        "Me haces mejor persona cada día.",
-        "Eres la respuesta a todas mis oraciones.",
-        "Eres mi pedacito de cielo.",
-        "Gracias por iluminar mis días.",
-        "A tu lado, todo tiene sentido.",
-        "Eres mi hoy y todos mis mañanas.",
-        "Tu sonrisa es mi motor.",
-        "Contigo la vida es una aventura hermosa.",
-        "Prometo cuidarte siempre.",
-        "No imagino un futuro si no es a tu lado.",
-        "Eres mi persona favorita.",
-        "Gracias por hacerme vibrar con el alma.",
+const MENSAJE_FINAL =
+"Hoy ya no quiero seguir expresando lo que siento solamente en mensajes. Quiero preguntarte algo que llevo sintiendo desde hace mucho tiempo... ¿Quieres ser mi novia? 💍❤️";
 
-        // NUEVAS FRASES
-        "Siento que algo muy bonito está creciendo entre nosotros.",
-        "Cada día contigo se siente más especial que el anterior.",
-        "A veces me sorprendo sonriendo solo por pensar en ti.",
-        "Llegaste sin avisar y ahora no imagino mis días sin ti.",
-        "Contigo todo se siente más tranquilo y más bonito.",
-        "Me gusta la forma en que haces feliz mi corazón.",
-        "Eres esa casualidad que terminó cambiando todo.",
-        "Cada conversación contigo se convierte en mi parte favorita del día.",
-        "No sabía cuánto necesitaba tu presencia hasta que llegaste.",
-        "Si algún día dudas de cuánto te quiero, mira todo lo que haces sentir en mí.",
-        "Me encanta construir recuerdos contigo.",
-        "Tienes una forma de hacer que todo valga la pena.",
-        "A veces pienso que el universo conspiró para cruzarnos.",
-        "No quiero que esto sea algo pasajero.",
-        "Siento paz cuando estoy contigo.",
-        "Quiero seguir descubriendo la vida contigo.",
-        "Hay personas que llegan y cambian todo. Tú eres una de ellas.",
-        "Gracias por existir y coincidir conmigo.",
-        "Lo mejor de mis días casi siempre termina siendo tú.",
-        "Poco a poco te has convertido en mi lugar favorito.",
-        "Ya no eres solo alguien importante para mí.",
-        "Creo que mi corazón tomó una decisión hace mucho tiempo.",
-        "Mañana será un día muy importante para nosotros."
+let racha =
+parseInt(localStorage.getItem('racha_val')) || 44;
 
-    ];
+let ultimaFecha =
+localStorage.getItem('fecha_val');
 
-    // =========================
-    // MENSAJE FINAL
-    // =========================
+let hoy =
+new Date().toDateString();
 
-    const MENSAJE_FINAL =
-        "Hoy ya no quiero seguir expresando lo que siento solamente en mensajes. Quiero preguntarte algo que llevo sintiendo desde hace mucho tiempo... ¿Quieres ser mi novia? 💍❤️";
+function esFechaFinal(){
 
-    // =========================
-    // SISTEMA
-    // =========================
+    const ahora = new Date();
 
-    let racha = parseInt(localStorage.getItem('racha_val')) || 44;
+    return(
+        ahora.getFullYear() === FECHA_FINAL.getFullYear() &&
+        ahora.getMonth() === FECHA_FINAL.getMonth() &&
+        ahora.getDate() === FECHA_FINAL.getDate()
+    );
+}
 
-    let ultimaFecha = localStorage.getItem('fecha_val');
+function actualizarPantalla(){
 
-    let hoy = new Date().toDateString();
+    document.getElementById('streak-num').innerText =
+    racha;
 
-    function esFechaFinal() {
+    let nivel =
+    Math.floor(racha / 5) + 1;
 
-        const hoyReal = new Date();
+    document.getElementById('lvl-tag').innerText =
+    "Nivel " + nivel;
 
-        return (
-            hoyReal.getFullYear() === FECHA_FINAL.getFullYear() &&
-            hoyReal.getMonth() === FECHA_FINAL.getMonth() &&
-            hoyReal.getDate() === FECHA_FINAL.getDate()
-        );
+    let progreso =
+    (racha % 5) * 20;
+
+    if(racha > 0 && racha % 5 === 0){
+        progreso = 100;
     }
 
-    function actualizarPantalla() {
+    document.getElementById('progress-bar').style.width =
+    progreso + "%";
 
-        document.getElementById('streak-num').innerText = racha;
+    if(ultimaFecha === hoy){
 
-        let nivel = Math.floor(racha / 5) + 1;
+        document.getElementById('revelar-ui')
+        .classList.add('hidden');
 
-        document.getElementById('lvl-tag').innerText = "Nivel " + nivel;
+        document.getElementById('mensaje-ui')
+        .classList.remove('hidden');
 
-        let progreso = (racha % 5) * 20;
+        let mensaje = "";
 
-        if (racha > 0 && racha % 5 === 0) {
-            progreso = 100;
+        if(esFechaFinal()){
+
+            mensaje = MENSAJE_FINAL;
+
+            document.getElementById('btn-vuelve').innerText =
+            "Nuestra historia apenas comienza ❤️";
+
+            document.getElementById('emoji-final').innerText =
+            "💍❤️";
+
+        }else{
+
+            let indiceMensaje =
+            (racha - 1) % MIS_MENSAJES.length;
+
+            mensaje =
+            MIS_MENSAJES[indiceMensaje];
+
+            document.getElementById('btn-vuelve').innerText =
+            "Vuelve mañana";
+
+            document.getElementById('emoji-final').innerText =
+            "🌹";
         }
 
-        document.getElementById('progress-bar').style.width = progreso + "%";
-
-        if (ultimaFecha === hoy) {
-
-            document.getElementById('revelar-ui').classList.add('hidden');
-
-            document.getElementById('mensaje-ui').classList.remove('hidden');
-
-            let mensaje = "";
-
-            // =========================
-            // SI ES 28 DE JUNIO
-            // =========================
-
-            if (esFechaFinal()) {
-
-                mensaje = MENSAJE_FINAL;
-
-                document.getElementById('btn-vuelve').innerText =
-                    "Nuestra historia apenas comienza ❤️";
-
-                document.getElementById('emoji-final').innerText = "💍❤️";
-
-            } else {
-
-                // =========================
-                // MENSAJES INFINITOS
-                // =========================
-
-                let indiceMensaje =
-                    (racha - 1) % MIS_MENSAJES.length;
-
-                mensaje = MIS_MENSAJES[indiceMensaje];
-
-                document.getElementById('btn-vuelve').innerText =
-                    "Vuelve mañana";
-
-                document.getElementById('emoji-final').innerText = "🌹";
-            }
-
-            let mensajeFinal =
-                `<span id="day-label">Día ${racha}</span>` + mensaje;
-
-            document.getElementById('daily-text').innerHTML = mensajeFinal;
-        }
+        document.getElementById('daily-text').innerHTML =
+        '<span id="day-label">Día ' +
+        racha +
+        '</span>' +
+        mensaje;
     }
+}
 
-    function revelar() {
+function revelar(){
 
-        if (ultimaFecha !== hoy) {
+    if(ultimaFecha !== hoy){
 
-            racha++;
+        racha++;
 
-            ultimaFecha = hoy;
+        ultimaFecha = hoy;
 
-            localStorage.setItem('racha_val', racha);
+        localStorage.setItem('racha_val',racha);
 
-            localStorage.setItem('fecha_val', hoy);
+        localStorage.setItem('fecha_val',hoy);
 
-            actualizarPantalla();
-        }
+        actualizarPantalla();
     }
+}
 
-    actualizarPantalla();
+actualizarPantalla();
 
 </script>
+
+</body>
+</html>
